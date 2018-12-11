@@ -116,16 +116,20 @@ $(document).ready(function () {
     });
   
     $("#search_button").click(function(){
-      $("#depart_flight").hide();
-      $("#return_flight").hide();
-      $("#booking_banner_not_ready").show();
-      $("#booking_banner_ready").hide();
-      $("#depart_flight_item_list").html("");
-      $("#return_flight_item_list").html(""); 
-      searchFlight();
-      $("#depart_flight").show();
-      if(round == true) {
-        $("#return_flight").show();
+      if($("#depart_place_val").val()==null || $("#depart_place_val").val()==""){
+        alert("Please enter the departure place");
+      }else{
+        $("#depart_flight").hide();
+        $("#return_flight").hide();
+        $("#booking_banner_not_ready").show();
+        $("#booking_banner_ready").hide();
+        $("#depart_flight_item_list").html("");
+        $("#return_flight_item_list").html(""); 
+        searchFlight();
+        $("#depart_flight").show();
+        if(round == true) {
+          $("#return_flight").show();
+        }
       }
     });
   });
