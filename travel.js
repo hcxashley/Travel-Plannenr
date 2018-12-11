@@ -354,6 +354,7 @@ function loadFlight() {
 
 // load weather page
 function loadWeather() {
+  clearWeather();
   $("#flight").hide();
   $("#intro").hide();
   $("#weather").show();
@@ -399,7 +400,9 @@ function clearBooking() {
   $("#email_val").val('');
 }
 
-function clearWeather() {}
+function clearWeather() {
+  $("#weather").html("");
+}
   
 function clearItinerary() {
   $(".itinerary_list").html("");
