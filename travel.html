@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Travel Planner</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="travel.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.devbridge-autocomplete/1.2.27/jquery.autocomplete.min.js"></script> 
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDluvnDQhOVbShEbyAVIl9mf8GIexdUPf8"></script>
+    <script src="travel.js"></script>
+
+</head>
+
+<body>
+<!-- Top Menu Bar -->
+<div class="top_menu_bar">
+    <span href="" class="top_menu_heading">Travel Planner</span>
+    <ul class="top_menu_list" hidden = "true">
+        <li class="top_menu_item"><span class="top_menu_item_text" id = "home_button">Home</span></li>
+        <li class="top_menu_item"><span class="top_menu_item_text" id = "itinerary_button">My Itineraries</span></li>
+        <li class="top_menu_item"><span class="top_menu_item_text" id = "signout_button">Sign Out</span></li>
+    </ul>
+</div>
+
+<!-- Login -->
+<div class="login_vedeo video_background">
+  <div class="video_foreground">
+    <iframe id="vedeo_iframe" src="https://www.youtube.com/embed/KczTx2npPsI?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=1&wmode=transparent&playlist=KczTx2npPsI" frameborder="0" allowfullscreen></iframe>
+  </div>
+</div>
+<div class="login">
+      <p>User name: <input id="username" value="hcx"></input></p>
+      <p>Password:&nbsp <input id="password" type="password" value="Hcx961126"></input></p>&nbsp&nbsp
+      <br>
+      <button id="login_button">Click Here to Log in</button>
+</div>
+
+
+<!-- Home Page -->
+<div class="home" hidden="true">
+  <!-- Banner -->
+  <div class="banner">
+    <h1 class="banner-head">
+      Plan Ahead<br>
+      Travel Anywhere
+    </h1>
+  </div>
+  <div class="city_view">
+    <!-- City View Control Bar -->
+    <div class="view_control_bar">
+      <div class="view_control_title">
+        <span>Explore the 10 Most Popular Cities in U.S.A.</span>
+      </div>
+      <div class="view_control">
+        <input type = "radio" class="view_option" id = "list_view" name = "view" value = "list" checked>
+        <label for="radio"> List View </label>
+        &nbsp&nbsp&nbsp&nbsp
+        <input type="radio" class="view_option" id = "map_view" name="view" value="map">
+        <label for="radio"> Map View </label>
+        <br>
+      </div>
+    </div>
+
+    <!-- List View -->
+    <div class="city_list_view">
+      <div class="city_list_row_1">
+        <div id="city1" class="city_icon">
+          <div class="city_icon_text">
+            <p>Miami</p>
+          </div>
+        </div>
+        <div id="city2" class="city_icon">
+          <div class="city_icon_text">
+            <p>Houston</p>
+          </div>
+        </div>
+        <div id="city3" class="city_icon">
+          <div class="city_icon_text">
+            <p>Seattle</p>
+          </div>
+        </div>
+        <div id="city4" class="city_icon">
+          <div class="city_icon_text">
+            <p>Los Angeles</p>
+          </div>
+        </div>
+        <div id="city5" class="city_icon">
+          <div class="city_icon_text">
+            <p>San Francisco</p>
+          </div>
+        </div>
+      </div>
+      <div class="city_list_row_2">
+        <div id="city6" class="city_icon">
+          <div class="city_icon_text">
+            <p>Charlotte</p>
+          </div>
+        </div>
+        <div id="city7" class="city_icon">
+          <div class="city_icon_text">
+            <p>New York</p>
+          </div>
+        </div>
+        <div id="city8" class="city_icon">
+          <div class="city_icon_text">
+            <p>Atlanta</p>
+          </div>
+        </div>
+        <div id="city9" class="city_icon">
+          <div class="city_icon_text">
+            <p>Chicago</p>
+          </div>
+        </div>
+        <div id="city10" class="city_icon">
+          <div class="city_icon_text">
+            <p>Philadelphia</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Map View -->
+    <div class="city_map_view" id="map"> <p>test</p></div>
+  </div>
+</div>
+
+<!-- City Page -->
+<div class="city_page" hidden="true">
+  <!-- Gallery -->
+  <div class="gallery">  
+    <div class="container">
+        <img id="expandedImg">
+    </div> 
+    <div id="row1" class="row">
+      <div class="column">
+        <img id = "first" onclick="openImg(this);">
+      </div>
+      <div class="column">
+        <img id = "second" onclick="openImg(this);">
+      </div>
+      <div class="column">
+        <img id = "third" onclick="openImg(this);">
+      </div>
+    </div>
+    <div id="row2" class="row">
+      <div class="column">
+        <img id = "fourth" onclick="openImg(this);">
+      </div>
+      <div class="column">
+        <img id = "fifth" onclick="openImg(this);">
+      </div>
+      <div class="column">
+        <img id = "sixth" onclick="openImg(this);">
+      </div>
+    </div>
+  </div>
+
+  <!-- City Details -->
+  <div class="main">
+    <button id="intro_button" class="city_detail_button">Introduction</button>&nbsp
+    <button id="flight_button" class="city_detail_button">Flight</button>&nbsp
+    <button id="weather_button" class="city_detail_button">Weather</button>
+    
+    <div class="city_detail_block">
+
+      <!-- Intro -->
+      <div id="intro" class="city_detail"></div>
+    
+      <!-- Flight -->
+      <div id="flight" class="city_detail" hidden="true">
+        <!-- Flight Search Bar -->
+        <div id="flight_search_area">
+          <div id="flight_search_column1">
+            <div id="depart_place" class="place form-group col-sm-5">
+              <span>Flying from: </span>
+              <br> 
+              <input type="text" id="depart_place_val" placeholder="Enter the city name here">
+            </div>
+            <div id="arrive_place" class="place">
+              <span>Flying to:</span> 
+              <br>
+              <select id="arrival_place_val">
+                <option value="Airport1">Airport1</option>
+                <option value="Airport2">Airport2</option>
+              </select>
+            </div>
+          </div>
+          <div id="flight_search_column2">
+            <div id="depart_time" class="time">
+              <span>Departing:</span>
+              <br>
+              <input type="date" id="depart_time_val" name="depart_time" value="" min="2018-12-01" max="2019-12-31">
+            </div>
+            <div id="return_time" class="time">
+              <span>Returning:</span>
+              <br>
+              <input type="date" id="return_time_val" name="depart_time" value="" min="2018-12-01" max="2019-12-31">
+            </div>
+          </div>
+          <div id="flight_search_column3">
+            <div id="trip_type_selection_block">
+              <input type="radio" class="trip_type_option" name="oneway_roundtrip" value="roundtrip" id="roundtrip_button" checked="checked"> 
+              <label for="radio">Round Trip</label>
+              <br>
+              <input type="radio" class="trip_type_option" name="oneway_roundtrip" value="oneway" id="oneway_button"> 
+              <label for="radio">One Way</label>
+            </div>
+            <div id="search_button_block">
+              <button id="search_button">Search</button>
+            </div>
+          </div>
+        </div>
+        <!-- Flight Search Result -->
+        <div id="flight_result">
+          <div id="depart_flight" hidden="true">
+            <div class="result_flight_head">Departure flights: </div>
+            <div id="depart_flight_item_list"> </div>
+          </div>
+          <div id="return_flight" hidden="true">
+              <div class = "result_flight_head">Return flights: </div>
+              <div id = "return_flight_item_list"> </div>
+          </div>
+        </div>
+        <!-- Booking banner -->
+        <div id="booking_banner"> 
+          <div id="booking_banner_not_ready" hidden="true"> Please Select Your Flights  </div>
+          <div id="booking_banner_ready" hidden="true"> Click Here to Complete Your Booking </div>
+        </div>
+      
+        <!-- Weather -->
+        <div id="weather" class="city_detail" hidden="true">
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Booking Page -->
+<div class="booking_page" hidden="true">
+  <div id="booking_head">
+    Please fill out the form to complete your booking.
+  </div>
+  <div id="form">
+    <div id="form_column1">
+      <div id="column1_row1">First name (Required): </div>
+      <div id="column1_row2">Middle name: </div>
+      <div id="column1_row3">Last name (Required): </div>
+      <div id="column1_row4">Age (Required): </div>
+      <div id="column1_row5">Gender (Required): </div>
+      <div id="column1_row6">Email: </div>
+    </div>
+    <div id="form_column2">
+      <div id="column2_row1">
+        <input id="first_name_val">
+      </div>
+      <div id="column2_row2">
+        <input id="middle_name_val">
+      </div>
+      <div id="column2_row3">
+        <input id="last_name_val">
+      </div>
+      <div id="column2_row4">
+        <input id="age_val">
+      </div>
+      <div id="column2_row5">
+        <select id="gender">
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
+      </div>
+      <div id="column2_row6">
+        <input id="email_val">
+      </div>
+    </div>
+  </div>
+  <div id="booking_foot">
+    <button id="confirm_button">Confirm</button>
+    <button id="back_button">Back</button>
+  </div>
+</div>
+
+<!-- Itinerary Page -->
+<div class="itinerary_page" hidden="true">
+  <div class="itinerary_container">
+    <div class="itinerary_list"></div>
+    <div class="itinerary_detail"></div> 
+  </div>
+</div>
+
+
+</body>
+</html>
+
