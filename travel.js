@@ -1,15 +1,15 @@
 var root_url = "http://comp426.cs.unc.edu:3001/";
 
-var miami_intro = "Miami Intro";
-var nyc_intro = "New York Intro";
-var chicago_intro = "Chicagoo Intro";
-var la_intro = "Los Angeles Intro";
-var houston_intro = "Houston Intro";
-var sf_intro = "San Francisco Intro";
-var charlotte_intro = "Charlotte Intro";
-var philly_intro = "Philadelphia Intro";
-var seattle_intro = "Seattle Intro";
-var atlanta_intro = "Atlanta Intro";
+var miami_intro = "  Described as the only great city of the world that started as a fantasy, Miami, with its subtropical climate, naturally protected harbor, and spectacular beaches, has traditionally been a haven for tourists and retirees. Since the late 1980s, however, the city has sustained unprecedented growth and, while transforming its image, has emerged as a center of international finance and commerce and as a regional center for Latin American and Haitian art.With easy access to other parts of the country, Miami has developed into one of America's major transportation hubs, and thriving job and housing markets have made it an ideal location for business expansion and new construction.";
+var nyc_intro = "  New York is a city of superlatives: America's biggest; its most exciting; its business and cultural capitals; the nation's trendsetter. The city seems to pull in the best and the brightest from every corner of the country. The city's ethnic flavor has been nuanced by decades of immigrants whose first glimpse of America was the Statue of Liberty guarding New York Harbor and by large expatriate communities such as the United Nations headquartered there. Just minutes from the multimillion-dollar two-bedroom co-op apartments of Park Avenue, though, lies some of the most dire urban poverty in America. But the attendant crime that affects New Yorkers and visitors alike has seen a continued dramatic reduction from 1993 to 2004—NYC has a murder rate half that of cities such as Los Angeles and Chicago, in part as the result of a concerted effort by local agencies.";
+var chicago_intro = "  Chicago, the seat of Illinois's Cook County and the third largest city in the country, is the focus of a consolidated metropolitan statistical area that covers the primary metropolitan statistical areas of Gary, Indiana; Kankakee, Illinois; and Kenosha, Wisconsin. Brawling was the word Carl Sandburg applied to Chicago in his poem about the city. No longer the Hog Butcher for the World, at the dawn of the twenty-first century, Chicago is still an enthusiastically combative city with a lively political life. A railroad hub in the latter half of the nineteenth century, when its population had already reached 300,000 people, Chicago became a major force in the nation's development. Today, it is a national transportation, industrial, telecommunications, and financial leader as well as a city of great architectural significance, ethnic diversity, and cultural wealth.";
+var la_intro = "   Los Angeles is the second largest city in the United States in terms of population and one of the largest in terms of area. It is the center of a five-county metropolitan area and is considered the prototype of the future metropolis—a city on the cutting edge of all of the advantages and the problems of large urban areas. The glamour of Hollywood, Beverly Hills, the Sunset Strip, and the famous beaches have added to Los Angeles's reputation as a California paradise and have contributed to the area's phenomenal growth. Los Angeles is a city of fascinating diversity, incorporating one of the largest Hispanic populations in the United States, a major Asian community, and sizable populations of nearly every ethnic background in the world.";
+var houston_intro = "  During the late 1970s Houston epitomized opulence, glitter, and opportunity. The city's major industry, petrochemicals, rode the crest of a boom in the oilpatch, as Houstonians say. Get-rich-quick growth became a predominant feature across the sprawling landscape of the city. By 1982, however, a national recession, coupled with a wildly fluctuating oil market and devaluation of the Mexican peso, changed Houston's outlook from boom to bust. Unemployment and the local economy reached depression levels by 1985, prompting a painful retrenchment. Houston's recovery and subsequent expansion are the result of the growth of energy independent industry and diversification. Optimism is back in Houston as the city looks to new opportunities in high-technology and service industries.";
+var sf_intro = "  The term melting pot is used to describe many American cities and towns. This is indeed true for San Francisco, one of the few truly international cities in the United States. The neighborhoods are varied, yet each features a cohesiveness as unique as its inhabitants. Rows of elegant houses, the famous cable cars, clusters of ethnic neighborhoods, and the colorful waterfront all add to the distinctive international flavor of the city. Nearly half of those who live in the Bay Area were born outside of the United States or have at least one nonnative parent. The city's well-known hills offer stunning views of the Pacific Ocean and San Francisco Bay, and feature a wide array of shops, restaurants, and cosmopolitan nightlife.";
+var charlotte_intro = "  Charlotte, known as the Queen City, offers a fascinating mix of southern culture and growing business mecca. A major economic center with growing finance and defense industries, the city's economic base continues to develop at a rate more than twice that of the rest of the country. An excellent interstate highway system, good railroad access, and an inland port facility are other factors that have made Charlotte the major distribution center of the Southeast and one growing in both national and international importance.";
+var philly_intro = "  Rich in history and culture, Philadelphia has been in the forefront of the nation's intellectual, economic, and humanitarian development for more than three hundred years. Today its efforts are being directed to restoration with an emphasis on preserving the best of the past while allowing for the development of a vigorous new city. A city of neighborhoods, trees, parks, and open spaces, Philadelphia offers the advantages of living in a big city while maintaining a small-town atmosphere and preserving reminders of its dignified past. The Greater Philadelphia area has been on numerous best city lists as a good place to balance work and family life.";
+var seattle_intro = "  Little more than a century ago, Seattle—nicknamed The Emerald City—was a pioneer outpost and a quiet lumbering town. Transformed by the Yukon gold rush into a thriving metropolis, Seattle has become the transportation, manufacturing, commercial, and services hub for the Pacific Northwest as well as the largest urban area north of San Francisco, California. The city's arts community has gained an international reputation, annually drawing audiences from throughout the United States and abroad. Nestled between two magnificent mountain ranges, with a breathtaking view of a lake and bay, Seattle enjoys a climate one observer has likened to an airborne ocean bath.";
+var atlanta_intro = "  Georgia's capital and largest city, Atlanta is a major Southern financial and cultural force and the focus of a metropolitan statistical area that covers more than 6,000 square miles and includes more than 110 municipalities. People from all over the country, joined by immigrants from other lands, have flocked to Atlanta's mild climate, physical beauty, and job opportunities. Offering Old South graciousness blended with an ambitious zest for expansion and dominance, Atlanta has assumed an important position in national and international commerce. Ted Turner, one of the city's well-known citizens, has declared that Atlanta has absolutely everything going for it—climate, location, great transportation, easy air access, and a government that's both cooperative and supportive. This is a judgment widely shared by both residents and visitors.";
 
 var locations = [
   ['Miami', 25.761681, -80.191788, 4164138],
@@ -435,8 +435,48 @@ function HTTPcall(city){
   }
   return $.get("https://api.openweathermap.org/data/2.5/weather?id=" + id + "&appid=ac141ae24c04ea59edfa71a5ab109b73",
                 (response) => {
-                    $("#weather").append("<p>"+KtoF(response.main.temp)+"</p>");
-                    $("#weather").append("<p>"+response.weather[0].description+"</p>");
+                  var temp = response.main.temp;
+                  var weather = response.weather[0].description;
+                  // add weather info
+                  $("#weather").append("<br><br>");
+                  $("#weather").append("<p> Local temperature: "+KtoF(response.main.temp)+"</p>");
+                  $("#weather").append("<p> Local weather: "+response.weather[0].description+"</p>");
+                  if(weather.search("rain") != -1) {
+                    $("#weather").append("<p> Remember to bring an umbrella! </p>");
+                  }
+                  if(weather.search("clear") != -1) {
+                    $("#weather").append("<p> It's a nice day! </p>");
+                  }
+                  if(weather.search("sunny") != -1) {
+                    $("#weather").append("<p> It's a nice day! </p>");
+                  }
+                  $("#weather").append("<br>");
+                  $("#weather").append("<img id='weather_picture'>");
+                  // add weather icon
+                  if(weather.search("rain") != -1) {
+                    document.getElementById("weather_picture").src = "image/weather/rainy.jpg";
+                  }
+                  if(weather.search("fog") != -1) {
+                    document.getElementById("weather_picture").src = "image/weather/fog.jpg";
+                  }
+                  if(weather.search("clear") != -1) {
+                    document.getElementById("weather_picture").src = "image/weather/clear.jpg";
+                  }
+                  if(weather.search("cloud") != -1) {
+                    document.getElementById("weather_picture").src = "image/weather/cloudy.jpg";
+                  }
+                  if(weather.search("sun") != -1) {
+                    document.getElementById("weather_picture").src = "image/weather/sunny.jpg";
+                  }
+                  if(weather.search("mist") != -1) {
+                    document.getElementById("weather_picture").src = "image/weather/mist.jpg";
+                  }
+                  if(weather.search("snow") != -1) {
+                    document.getElementById("weather_picture").src = "image/weather/snow.jpg";
+                  }
+                  if(weather.search("haze") != -1) {
+                    document.getElementById("weather_picture").src = "image/weather/haze.jpg";
+                  }
                 }
     )
 }
