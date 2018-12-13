@@ -105,33 +105,34 @@ $(document).ready(function () {
   // city page flight section
   $("#flight_button").click(function() {
     loadFlight();
-    $("#oneway_button").click(function() {
-      $("#return_time").hide();
-      round = false;
-    });
+  });
+
+  $("#oneway_button").click(function() {
+    $("#return_time").hide();
+    round = false;
+  });
   
-    $("#roundtrip_button").click(function() {
-      $("#return_time").show();
-      round = true;
-    });
+  $("#roundtrip_button").click(function() {
+    $("#return_time").show();
+    round = true;
+  });
   
-    $("#search_button").click(function(){
-      if($("#depart_place_val").val()==null || $("#depart_place_val").val()==""){
-        alert("Please enter the departure place");
-      }else{
-        $("#depart_flight").hide();
-        $("#return_flight").hide();
-        $("#booking_banner_not_ready").show();
-        $("#booking_banner_ready").hide();
-        $("#depart_flight_item_list").html("");
-        $("#return_flight_item_list").html(""); 
-        searchFlight();
-        $("#depart_flight").show();
-        if(round == true) {
-          $("#return_flight").show();
-        }
+  $("#search_button").click(function(){
+    if($("#depart_place_val").val()==null || $("#depart_place_val").val()==""){
+      alert("Please enter the departure name");
+    }else{
+      $("#depart_flight").hide();
+      $("#return_flight").hide();
+      $("#booking_banner_not_ready").show();
+      $("#booking_banner_ready").hide();
+      $("#depart_flight_item_list").html("");
+      $("#return_flight_item_list").html(""); 
+      searchFlight();
+      $("#depart_flight").show();
+      if(round == true) {
+        $("#return_flight").show();
       }
-    });
+    }
   });
 
   $("#booking_banner_ready").click(function(){
@@ -202,6 +203,7 @@ function signOut(){
   $(".city_page").hide();
   $(".top_menu_list").hide();
   $(".itinerary_page").hide();
+  $(".top_menu_heading").text("Travel Planner");
   clearFlight();
   clearWeather();
   clearItinerary();
@@ -377,6 +379,7 @@ function loadItinerary() {
   $(".city_page").hide();
   $(".home").hide();
   $(".itinerary_page").show();
+  $(".top_menu_heading").text("Itinerary");
   searchItinerary();
 }
   
